@@ -1,0 +1,28 @@
+:root {
+  color-scheme: light;
+  --color-page: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f2f4f7;
+  --color-border: #d9dee7;
+  --color-text: #18212f;
+  --color-text-muted: #5d6b7e;
+  --color-accent: #3b82f6;
+  --color-accent-strong: #1d4ed8;
+  --color-accent-soft: #dbeafe;
+  --color-success: #138a5b;
+  --color-danger: #b42318;
+  --shadow-card: 0 14px 36px rgba(24, 33, 47, 0.08);
+  --radius-card: 24px;
+  --radius-pill: 999px;
+  --radius-input: 16px;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --font-sans: "SF Pro Text", "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-display: "Avenir Next", "SF Pro Display", "Segoe UI", sans-serif;
+  --content-width: 48rem;
+}

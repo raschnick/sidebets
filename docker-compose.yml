@@ -1,0 +1,15 @@
+services:
+  sidebets:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: "3000"
+      DATABASE_URL: "file:/app/data/sidebets.db"
+    volumes:
+      - sidebets_data:/app/data
+
+volumes:
+  sidebets_data:

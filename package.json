@@ -1,0 +1,37 @@
+{
+  "name": "sidebets",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:client": "vite",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "vite build",
+    "build:server": "tsc -p tsconfig.server.json",
+    "start": "node dist/server/index.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1",
+    "better-sqlite3": "^12",
+    "drizzle-orm": "^0.44",
+    "hono": "^4",
+    "pg": "^8",
+    "react": "^19",
+    "react-dom": "^19",
+    "react-router-dom": "^7"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^5",
+    "concurrently": "^9",
+    "tsx": "^4",
+    "typescript": "^5",
+    "vite": "^7",
+    "vite-plugin-pwa": "^1"
+  }
+}

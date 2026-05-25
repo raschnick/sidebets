@@ -1,3 +1,0 @@
-# sidebets
-
-test git connection

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-server/
+drizzle/
+data/
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.local
+.DS_Store
+*.local
