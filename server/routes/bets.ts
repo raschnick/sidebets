@@ -82,13 +82,16 @@ function getOptionRowsForBetIds(betIds: number[]) {
   return db.select().from(betOptions).where(inArray(betOptions.betId, betIds)).all();
 }
 
-function getHiddenUserIdsForBet(betId: number) {
+function getHiddenUsersForBet(betId: number) {
   return db
-    .select({ userId: betHidden.userId })
+    .select({
+      userId: betHidden.userId,
+      username: users.username
+    })
     .from(betHidden)
+    .innerJoin(users, eq(users.id, betHidden.userId))
     .where(eq(betHidden.betId, betId))
-    .all()
-    .map((entry) => entry.userId);
+    .all();
 }
 
 function canRevealAllPicks(
@@ -187,8 +190,8 @@ function serializeBetDetail(
   }
 
   const visiblePicks = revealAll ? pickRows : pickRows.filter((row) => row.userId === currentUser.id);
-  const hiddenUserIds =
-    currentUser.isAdmin || currentUser.id === bet.createdBy ? getHiddenUserIdsForBet(bet.id) : [];
+  const hiddenUsers =
+    currentUser.isAdmin || currentUser.id === bet.createdBy ? getHiddenUsersForBet(bet.id) : [];
   const winners =
     bet.status === 'settled' && bet.winnerOptionId
       ? visiblePicks.filter((pick) => pick.optionId === bet.winnerOptionId).map(toPick)
@@ -198,7 +201,8 @@ function serializeBetDetail(
     ...serializeBetSummary(bet, currentUser, options, pickRows),
     options: options.map((option) => toOption(option, optionCounts.get(option.id), revealAll)),
     picks: visiblePicks.map(toPick),
-    hiddenUserIds,
+    hiddenUserIds: hiddenUsers.map((entry) => entry.userId),
+    hiddenUsernames: hiddenUsers.map((entry) => entry.username),
     winners
   };
 }

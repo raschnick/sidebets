@@ -8,6 +8,7 @@ export default function Step1Details({ value, onChange }: WizardStepProps) {
         <input
           id="bet-title"
           className="input"
+          autoFocus
           placeholder="Will we make it before kickoff?"
           value={value.title}
           onChange={(event) => onChange({ ...value, title: event.target.value })}

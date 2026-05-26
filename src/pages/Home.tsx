@@ -42,14 +42,10 @@ export default function Home() {
       </section>
 
       <section className="card stack">
-        <div className="row">
+        <div className="row section-header">
           <div>
             <h2 className="section-title">Your groups</h2>
-            <p className="muted">Hidden bets stay filtered out server-side for each viewer.</p>
           </div>
-          <button type="button" className="button-ghost" onClick={() => void loadGroups()}>
-            Refresh
-          </button>
         </div>
 
         {error ? <div className="error">{error}</div> : null}
@@ -61,12 +57,12 @@ export default function Home() {
         ) : (
           <div className="group-grid">
             {groups.map((group) => (
-              <Link key={group.id} to={`/groups/${group.id}`} className="card stack">
+              <Link key={group.id} to={`/groups/${group.id}`} className="card card-link stack">
                 <div className="row">
                   <strong>{group.name}</strong>
                   <span className="pill">{group.memberCount} members</span>
                 </div>
-                <div className="muted">Created {new Date(group.createdAt).toLocaleString()}</div>
+                <div className="muted">Created {new Date(group.createdAt).toLocaleDateString()}</div>
               </Link>
             ))}
           </div>

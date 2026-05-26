@@ -84,6 +84,7 @@ export default function GroupCreate() {
               <input
                 id="group-name"
                 className="input"
+                autoFocus
                 placeholder="Friday Night Crew"
                 value={groupName}
                 onChange={(event) => setGroupName(event.target.value)}
@@ -112,10 +113,7 @@ export default function GroupCreate() {
                     />
                     <div>
                       <strong>{user.username}</strong>
-                      <div className="muted">
-                        User #{user.id}
-                        {user.isAdmin ? ' · admin' : ''}
-                      </div>
+                      <div className="muted">{user.isAdmin ? 'admin' : 'member'}</div>
                     </div>
                   </label>
                 ))}
@@ -154,10 +152,7 @@ export default function GroupCreate() {
                   selectedMembers.map((user) => (
                     <div key={user.id} className="list-item">
                       <strong>{user.username}</strong>
-                      <div className="muted">
-                        User #{user.id}
-                        {user.isAdmin ? ' · admin' : ''}
-                      </div>
+                      <div className="muted">{user.isAdmin ? 'admin' : 'member'}</div>
                     </div>
                   ))
                 )}
@@ -168,7 +163,7 @@ export default function GroupCreate() {
 
         {error ? <div className="error">{error}</div> : null}
 
-        <div className="button-row">
+        <div className="page-actions">
           {step === 0 ? (
             <Link className="button-ghost" to="/">
               Cancel

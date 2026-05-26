@@ -41,7 +41,7 @@ export default function Bet() {
   const isCreator = bet?.createdBy === currentUserId;
   const winningOption = bet?.options.find((option) => option.id === bet.winnerOptionId) ?? null;
 
-  const visibleParticipantPicks = useMemo(() => {
+  const participantPicks = useMemo(() => {
     if (!bet) {
       return [];
     }
@@ -90,7 +90,7 @@ export default function Bet() {
       {bet ? (
         <>
           <section className="card stack">
-            <div className="row">
+            <div className="row section-header">
               <div>
                 <h1 className="page-title">{bet.title}</h1>
                 <p className="muted">{bet.description || 'No description provided.'}</p>
@@ -113,9 +113,9 @@ export default function Bet() {
               </div>
             ) : null}
 
-            {bet.hiddenUserIds.length > 0 ? (
+            {bet.hiddenUsernames.length > 0 ? (
               <div className="list-item">
-                <strong>Hidden from user IDs:</strong> {bet.hiddenUserIds.join(', ')}
+                <strong>Hidden from:</strong> {bet.hiddenUsernames.join(', ')}
               </div>
             ) : null}
           </section>
@@ -170,13 +170,9 @@ export default function Bet() {
           </section>
 
           <section className="card stack">
-            <div className="row">
+            <div className="row section-header">
               <div>
-                <h2 className="section-title">Visible picks</h2>
-                <p className="muted">
-                  Blind mode is enforced by the API, so this list only contains what the current user is allowed to
-                  see.
-                </p>
+                <h2 className="section-title">Picks</h2>
               </div>
               {bet.canSettle ? (
                 <Link className="button" to={`/bets/${bet.id}/settle`}>
@@ -185,11 +181,11 @@ export default function Bet() {
               ) : null}
             </div>
 
-            {visibleParticipantPicks.length === 0 ? (
-              <div className="empty-state">No visible picks yet.</div>
+            {participantPicks.length === 0 ? (
+              <div className="empty-state">No picks yet.</div>
             ) : (
               <div className="list">
-                {visibleParticipantPicks.map((pick) => {
+                {participantPicks.map((pick) => {
                   const option = bet.options.find((entry) => entry.id === pick.optionId);
                   const isWinner = bet.status === 'settled' && pick.optionId === bet.winnerOptionId;
 

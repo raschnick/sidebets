@@ -27,6 +27,7 @@ export interface GroupSummary {
   id: number;
   name: string;
   createdBy: number;
+  createdByUsername: string;
   createdAt: string;
   memberCount: number;
 }
@@ -86,6 +87,7 @@ export interface BetSummary {
 export interface BetDetail extends BetSummary {
   picks: BetPick[];
   hiddenUserIds: number[];
+  hiddenUsernames: string[];
   winners: BetPick[];
 }
 

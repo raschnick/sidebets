@@ -48,10 +48,6 @@ export default function Admin() {
     return <Navigate to="/" replace />;
   }
 
-  async function reloadUsers() {
-    await refreshBootstrap();
-  }
-
   async function handleCreateUser(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setCreatingUser(true);
@@ -88,7 +84,7 @@ export default function Admin() {
         isAdmin: draft.isAdmin
       });
       await refreshBootstrap();
-      setNotice(`Updated user #${userId}.`);
+      setNotice(`Updated ${draft.username}.`);
     } catch (saveError) {
       setError(saveError instanceof Error ? saveError.message : 'Could not update user.');
     } finally {
@@ -120,6 +116,7 @@ export default function Admin() {
             <input
               id="new-username"
               className="input"
+              autoFocus
               placeholder="casey"
               value={newUser.username}
               onChange={(event) => setNewUser((current) => ({ ...current, username: event.target.value }))}
@@ -150,21 +147,20 @@ export default function Admin() {
             </div>
           </label>
 
-          <button className="button" type="submit" disabled={creatingUser}>
-            {creatingUser ? 'Creating user…' : 'Create user'}
-          </button>
+          <div className="page-actions">
+            <button className="button" type="submit" disabled={creatingUser}>
+              {creatingUser ? 'Creating user…' : 'Create user'}
+            </button>
+          </div>
         </form>
       </section>
 
       <section className="card stack">
-        <div className="row">
+        <div className="row section-header">
           <div>
             <h2 className="section-title">Existing users</h2>
             <p className="muted">Edit usernames, toggle admin access, or set a fresh password.</p>
           </div>
-          <button type="button" className="button-ghost" onClick={() => void reloadUsers()}>
-            Refresh
-          </button>
         </div>
 
         {notice ? <div className="success">{notice}</div> : null}
@@ -181,7 +177,7 @@ export default function Admin() {
             return (
               <div key={user.id} className="list-item stack">
                 <div className="row">
-                  <strong>User #{user.id}</strong>
+                  <strong>{draft.username}</strong>
                   <span className="pill">{draft.isAdmin ? 'Admin' : 'Member'}</span>
                 </div>
 

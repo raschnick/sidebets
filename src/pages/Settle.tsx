@@ -59,7 +59,7 @@ export default function Settle() {
 
       {bet ? (
         <section className="card stack">
-          <div className="row">
+          <div className="row section-header">
             <div>
               <h1 className="page-title">Settle “{bet.title}”</h1>
               <p className="muted">Only the original creator can finish the bet and reveal the full result.</p>
@@ -82,15 +82,17 @@ export default function Settle() {
                   />
                   <div>
                     <strong>{option.label}</strong>
-                    <div className="muted">{option.pickCount ?? 0} visible picks</div>
+                    <div className="muted">{option.pickCount ?? 0} picks</div>
                   </div>
                 </label>
               ))}
             </div>
 
-            <button className="button" type="submit" disabled={saving}>
-              {saving ? 'Settling…' : 'Settle bet'}
-            </button>
+            <div className="page-actions">
+              <button className="button" type="submit" disabled={saving}>
+                {saving ? 'Settling…' : 'Settle bet'}
+              </button>
+            </div>
           </form>
         </section>
       ) : null}

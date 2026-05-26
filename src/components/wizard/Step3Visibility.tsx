@@ -31,9 +31,7 @@ export default function Step3Visibility({ value, onChange, members, currentUserI
                 />
                 <div>
                   <strong>{member.username}</strong>
-                  <div className="muted">
-                    User #{member.id} · {member.role === 'group_admin' ? 'Group admin' : 'Member'}
-                  </div>
+                  <div className="muted">{member.role === 'group_admin' ? 'Group admin' : 'Member'}</div>
                 </div>
               </label>
             );

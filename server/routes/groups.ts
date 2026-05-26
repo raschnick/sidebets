@@ -24,10 +24,13 @@ function serializeMember(row: {
 }
 
 function buildGroupSummary(group: typeof groups.$inferSelect, members: GroupMember[]): GroupSummary {
+  const creator = members.find((member) => member.id === group.createdBy);
+
   return {
     id: group.id,
     name: group.name,
     createdBy: group.createdBy,
+    createdByUsername: creator?.username ?? 'Unknown',
     createdAt: toIsoString(group.createdAt) ?? new Date().toISOString(),
     memberCount: members.length
   };

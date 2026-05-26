@@ -49,6 +49,7 @@ export default function Login() {
               <input
                 id="username"
                 className="input"
+                autoFocus
                 autoComplete="username"
                 value={username}
                 onChange={(event) => setUsername(event.target.value)}
@@ -67,9 +68,11 @@ export default function Login() {
               />
             </div>
 
-            <button className="button" type="submit" disabled={submitting}>
-              {submitting ? 'Signing in…' : 'Sign in'}
-            </button>
+            <div className="page-actions">
+              <button className="button" type="submit" disabled={submitting}>
+                {submitting ? 'Signing in…' : 'Sign in'}
+              </button>
+            </div>
           </form>
 
           {error ? <div className="error">{error}</div> : null}
