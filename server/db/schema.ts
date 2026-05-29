@@ -4,6 +4,8 @@ export const users = sqliteTable('users', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   username: text('username').notNull().unique(),
   displayName: text('display_name').notNull(),
+  status: text('status').notNull().default(''),
+  avatarDataUrl: text('avatar_data_url').notNull().default(''),
   passwordHash: text('password_hash').notNull(),
   isAdmin: integer('is_admin', { mode: 'boolean' }).notNull().default(false),
   createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull().$defaultFn(() => new Date())

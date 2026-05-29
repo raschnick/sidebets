@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { api } from '../lib/api.js';
+import UserAvatar from '../components/UserAvatar.js';
 import { useAppShell } from '../lib/app-shell.js';
 import { getGroupAvatarLabel, getGroupAvatarStyle } from '../lib/group-avatar.js';
 import type { BetSummary, GroupDetail } from '../lib/types.js';
@@ -74,9 +75,15 @@ export default function Group() {
 
             <div className="row-wrap">
               {group.members.map((member) => (
-                <span key={member.id} className="pill">
-                  {member.username}
-                </span>
+                <Link key={member.id} className="pill group-member-pill" to={`/users/${member.id}`}>
+                  <UserAvatar
+                    className="member-pill-avatar"
+                    username={member.username}
+                    avatarUrl={member.avatarUrl}
+                    ariaHidden
+                  />
+                  <span>{member.username}</span>
+                </Link>
               ))}
             </div>
           </section>

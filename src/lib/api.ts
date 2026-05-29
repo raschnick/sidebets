@@ -6,6 +6,7 @@ import type {
   BetDetail,
   BetOption,
   BetSummary,
+  ChangePasswordInput,
   CreateUserInput,
   CreateBetInput,
   CreateGroupInput,
@@ -14,6 +15,7 @@ import type {
   LoginInput,
   SettleBetInput,
   SubmitPickInput,
+  UpdateProfileInput,
   UpdateUserInput,
   UserSummary,
   UserPick
@@ -109,6 +111,22 @@ export const api = {
 
   updateUser: async (userId: number, input: UpdateUserInput): Promise<UserSummary> => {
     const payload = await request<{ user: UserSummary }>(`/users/${userId}`, {
+      method: 'PATCH',
+      body: JSON.stringify(input)
+    });
+    return payload.user;
+  },
+
+  updateProfile: async (input: UpdateProfileInput): Promise<UserSummary> => {
+    const payload = await request<{ user: UserSummary }>('/users/me', {
+      method: 'PATCH',
+      body: JSON.stringify(input)
+    });
+    return payload.user;
+  },
+
+  changePassword: async (input: ChangePasswordInput): Promise<UserSummary> => {
+    const payload = await request<{ user: UserSummary }>('/users/me/password', {
       method: 'PATCH',
       body: JSON.stringify(input)
     });

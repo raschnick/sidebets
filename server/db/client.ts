@@ -38,6 +38,8 @@ sqlite.exec(`
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL UNIQUE,
     display_name TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT '',
+    avatar_data_url TEXT NOT NULL DEFAULT '',
     password_hash TEXT NOT NULL,
     is_admin INTEGER NOT NULL DEFAULT 0,
     created_at INTEGER NOT NULL DEFAULT (unixepoch() * 1000)
@@ -110,6 +112,26 @@ sqlite.exec(`
   CREATE INDEX IF NOT EXISTS idx_bet_options_bet ON bet_options(bet_id);
   CREATE INDEX IF NOT EXISTS idx_picks_bet ON picks(bet_id);
 `);
+
+type TableInfoRow = {
+  name: string;
+};
+
+function ensureUsersProfileColumns() {
+  const columns = sqlite.prepare("PRAGMA table_info('users')").all() as TableInfoRow[];
+  const hasStatusColumn = columns.some((column) => column.name === 'status');
+  const hasAvatarColumn = columns.some((column) => column.name === 'avatar_data_url');
+
+  if (!hasStatusColumn) {
+    sqlite.exec("ALTER TABLE users ADD COLUMN status TEXT NOT NULL DEFAULT '';");
+  }
+
+  if (!hasAvatarColumn) {
+    sqlite.exec("ALTER TABLE users ADD COLUMN avatar_data_url TEXT NOT NULL DEFAULT '';");
+  }
+}
+
+ensureUsersProfileColumns();
 
 export const db = drizzle(sqlite, { schema });
 

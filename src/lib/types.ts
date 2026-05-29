@@ -6,6 +6,8 @@ export interface UserSummary {
   id: number;
   username: string;
   displayName: string;
+  status: string;
+  avatarUrl: string | null;
   isAdmin: boolean;
 }
 
@@ -138,7 +140,19 @@ export interface CreateUserInput {
 export interface UpdateUserInput {
   username?: string;
   password?: string;
+  status?: string;
+  avatarUrl?: string | null;
   isAdmin?: boolean;
+}
+
+export interface UpdateProfileInput {
+  username?: string;
+  status?: string;
+  avatarUrl?: string | null;
+}
+
+export interface ChangePasswordInput {
+  password: string;
 }
 
 export interface LoginInput {

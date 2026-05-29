@@ -7,10 +7,12 @@ import GroupCreate from './pages/GroupCreate.js';
 import GroupMembers from './pages/GroupMembers.js';
 import GroupSettled from './pages/GroupSettled.js';
 import Profile from './pages/Profile.js';
+import UserProfile from './pages/UserProfile.js';
 import Bet from './pages/Bet.js';
 import Settle from './pages/Settle.js';
 import Login from './pages/Login.js';
 import Admin from './pages/Admin.js';
+import UserAvatar from './components/UserAvatar.js';
 import { ApiError, api, clearSessionToken, hasSessionToken } from './lib/api.js';
 import type { AppBootstrap } from './lib/types.js';
 
@@ -103,8 +105,6 @@ function ProtectedLayout() {
     navigate('/login', { replace: true });
   }
 
-  const usernameInitial = bootstrap?.currentUser.username.slice(0, 1).toUpperCase() ?? '';
-
   if (unauthorized) {
     return <Navigate to="/login" replace />;
   }
@@ -151,9 +151,12 @@ function ProtectedLayout() {
                   aria-label={`Open account menu for ${bootstrap.currentUser.username}`}
                   onClick={() => setAccountMenuOpen((open) => !open)}
                 >
-                  <span className="account-avatar" aria-hidden="true">
-                    {usernameInitial}
-                  </span>
+                  <UserAvatar
+                    className="account-avatar"
+                    username={bootstrap.currentUser.username}
+                    avatarUrl={bootstrap.currentUser.avatarUrl}
+                    ariaHidden
+                  />
                   <span className="account-name">{bootstrap.currentUser.username}</span>
                   <span className={`account-chevron${accountMenuOpen ? ' open' : ''}`} aria-hidden="true">
                     ▾
@@ -221,6 +224,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />
+      },
+      {
+        path: 'users/:userId',
+        element: <UserProfile />
       },
       {
         path: 'groups/:groupId',

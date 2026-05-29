@@ -11,6 +11,8 @@ function serializeMember(row: {
   userId: number;
   username: string;
   displayName: string;
+  status: string;
+  avatarUrl: string;
   isAdmin: boolean;
   role: 'member' | 'group_admin';
 }): GroupMember {
@@ -18,6 +20,8 @@ function serializeMember(row: {
     id: row.userId,
     username: row.username,
     displayName: row.username,
+    status: row.status,
+    avatarUrl: row.avatarUrl || null,
     isAdmin: row.isAdmin,
     role: row.role
   };
@@ -47,6 +51,8 @@ function getMembersForGroupIds(groupIds: number[]) {
       userId: users.id,
       username: users.username,
       displayName: users.username,
+      status: users.status,
+      avatarUrl: users.avatarDataUrl,
       isAdmin: users.isAdmin,
       role: groupMembers.role
     })

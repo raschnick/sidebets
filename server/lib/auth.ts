@@ -8,6 +8,8 @@ export type CurrentUser = {
   id: number;
   username: string;
   displayName: string;
+  status: string;
+  avatarUrl: string | null;
   isAdmin: boolean;
 };
 
@@ -20,6 +22,8 @@ export function toCurrentUser(user: typeof users.$inferSelect): CurrentUser {
     id: user.id,
     username: user.username,
     displayName: user.username,
+    status: user.status,
+    avatarUrl: user.avatarDataUrl || null,
     isAdmin: user.isAdmin
   };
 }
