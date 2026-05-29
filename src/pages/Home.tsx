@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../lib/api.js';
+import { getGroupAvatarLabel, getGroupAvatarStyle } from '../lib/group-avatar.js';
 import type { GroupSummary } from '../lib/types.js';
 
 export default function Home() {
@@ -28,24 +29,14 @@ export default function Home() {
 
   return (
     <div className="stack">
-      <section className="card hero stack">
-        <h1>Your private groups.</h1>
-        <p>
-          Start a new group with a short guided flow, then keep every bet scoped to the people who should actually see
-          it.
-        </p>
-        <div className="button-row">
-          <Link className="button" to="/groups/new">
-            Create new group
-          </Link>
-        </div>
-      </section>
-
       <section className="card stack">
-        <div className="row section-header">
+        <div className="row section-header home-groups-header">
           <div>
             <h2 className="section-title">Your groups</h2>
           </div>
+          <Link className="button button-compact" to="/groups/new">
+            Create new group
+          </Link>
         </div>
 
         {error ? <div className="error">{error}</div> : null}
@@ -59,7 +50,16 @@ export default function Home() {
             {groups.map((group) => (
               <Link key={group.id} to={`/groups/${group.id}`} className="card card-link stack">
                 <div className="row">
-                  <strong>{group.name}</strong>
+                  <div className="group-identity">
+                    <span
+                      className="group-avatar"
+                      style={getGroupAvatarStyle(group.id)}
+                      aria-hidden="true"
+                    >
+                      {getGroupAvatarLabel(group.name)}
+                    </span>
+                    <strong>{group.name}</strong>
+                  </div>
                   <span className="pill">{group.memberCount} members</span>
                 </div>
                 <div className="muted">Created {new Date(group.createdAt).toLocaleDateString()}</div>

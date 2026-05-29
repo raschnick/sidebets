@@ -72,15 +72,31 @@ button {
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: var(--space-3);
+  margin-left: auto;
+  min-width: 0;
 }
 
-.brand {
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  font-size: 1.05rem;
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.brand-logo-icon {
+  width: 4.9rem;
+  height: 4.9rem;
+  display: block;
+  object-fit: contain;
+}
+
+.brand-wordmark {
+  width: auto;
+  height: 1.55rem;
+  display: block;
+  object-fit: contain;
 }
 
 .nav {
@@ -91,16 +107,16 @@ button {
 }
 
 .nav-primary {
-  padding: 0.25rem;
-  border-radius: 999px;
-  background: rgba(242, 244, 247, 0.95);
-  border: 1px solid rgba(217, 222, 231, 0.9);
+  padding: 0;
+  margin-left: auto;
+  min-width: 0;
+  flex-wrap: nowrap;
 }
 
 .nav-account {
-  margin-left: auto;
   gap: var(--space-3);
   position: relative;
+  flex-shrink: 0;
 }
 
 .nav-link {
@@ -123,6 +139,7 @@ button {
 .account-summary {
   display: inline-flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 0.7rem;
   min-height: 3rem;
   padding: 0.35rem 0.45rem 0.35rem 0.35rem;
@@ -168,6 +185,7 @@ button {
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--color-text);
+  white-space: nowrap;
 }
 
 .account-chevron {
@@ -247,6 +265,12 @@ button {
 
 .hero h1 {
   font-size: clamp(2rem, 6vw, 3rem);
+}
+
+.login-logo {
+  width: min(18rem, 72vw);
+  display: block;
+  margin: 0 auto;
 }
 
 .hero p,
@@ -355,6 +379,12 @@ button {
   color: var(--color-danger);
 }
 
+.button-compact {
+  min-height: 2.7rem;
+  padding: 0.65rem 0.95rem;
+  font-size: 0.92rem;
+}
+
 .button:active,
 .button-secondary:active,
 .button-ghost:active,
@@ -377,6 +407,35 @@ button {
 .pill-accent {
   background: var(--color-accent-soft);
   color: var(--color-accent-strong);
+}
+
+.group-identity {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.group-avatar {
+  width: 4rem;
+  height: 4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 18px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+.group-avatar-large {
+  width: 6.15rem;
+  height: 6.15rem;
+  border-radius: 28px;
+  font-size: 1.75rem;
 }
 
 .list {
@@ -565,23 +624,35 @@ button {
   }
 
   .topbar {
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
     padding: 0.75rem;
     border-radius: 24px;
   }
 
+  .brand-mark {
+    gap: 0.6rem;
+    margin-left: 0.3rem;
+  }
+
+  .brand-logo-icon {
+    width: 3.7rem;
+    height: 3.7rem;
+  }
+
+  .brand-wordmark {
+    height: 1.1rem;
+  }
+
   .topbar-actions {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 0;
   }
 
   .nav {
-    width: 100%;
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding-bottom: 2px;
+    justify-content: flex-end;
     scrollbar-width: none;
   }
 
@@ -591,30 +662,26 @@ button {
 
   .nav-primary,
   .nav-account {
-    width: 100%;
+    width: auto;
   }
 
   .nav-account {
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-left: 0;
   }
 
-  .account-menu-shell {
-    width: 100%;
-  }
-
   .account-trigger {
-    width: 100%;
     justify-content: flex-start;
   }
 
   .account-menu {
-    position: static;
-    min-width: 0;
-    width: 100%;
+    position: absolute;
+    top: calc(100% + 0.65rem);
+    right: 0;
+    min-width: 13rem;
+    width: min(16rem, calc(100vw - 1rem));
     margin-top: var(--space-2);
-    box-shadow: none;
-    backdrop-filter: none;
+    margin-left: 0;
   }
 
   .nav-link,
@@ -655,6 +722,20 @@ button {
     font-size: clamp(1.7rem, 8vw, 2.3rem);
   }
 
+  .group-avatar {
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 18px;
+    font-size: 1.05rem;
+  }
+
+  .group-avatar-large {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 24px;
+    font-size: 1.4rem;
+  }
+
   .section-header {
     flex-direction: column;
     align-items: stretch;
@@ -662,6 +743,23 @@ button {
 
   .section-header > :last-child {
     width: 100%;
+  }
+
+  .home-groups-header {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .home-groups-header > :last-child {
+    width: auto;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .button-compact {
+    min-height: 2.5rem;
+    padding: 0.58rem 0.8rem;
+    font-size: 0.9rem;
   }
 
   .button-row > *,

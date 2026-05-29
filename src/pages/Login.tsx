@@ -31,11 +31,7 @@ export default function Login() {
   return (
     <div className="app-shell">
       <div className="app-frame">
-        <section className="card hero stack">
-          <span className="pill pill-accent">Login required</span>
-          <h1>Sign in to SideBets.</h1>
-          <p>Enter your username and password to access your private groups and bets.</p>
-        </section>
+        <img className="login-logo" src="/sidebets-logo.png" alt="SideBets logo" />
 
         <section className="card stack">
           <div>

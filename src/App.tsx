@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, Navigate, NavLink, Outlet, RouterProvider, createBrowserRouter, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, Outlet, RouterProvider, createBrowserRouter, useLocation, useNavigate } from 'react-router-dom';
 import BetCreate from './pages/BetCreate.js';
 import Home from './pages/Home.js';
 import Group from './pages/Group.js';
@@ -136,21 +136,11 @@ function ProtectedLayout() {
     <div className="app-shell">
       <div className="app-frame">
         <header className="topbar">
-          <div>
-            <div className="brand">SideBets</div>
-          </div>
+          <Link className="brand-mark" to="/" aria-label="SideBets home">
+            <img className="brand-logo-icon" src="/sidebets-mark.png" alt="" />
+            <img className="brand-wordmark" src="/sidebets-wordmark.png" alt="SideBets" />
+          </Link>
           <div className="topbar-actions">
-            <nav className="nav nav-primary" aria-label="Primary navigation">
-              <NavLink className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`} to="/">
-                Home
-              </NavLink>
-              {bootstrap.currentUser.isAdmin ? (
-                <NavLink className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`} to="/admin">
-                  Admin
-                </NavLink>
-              ) : null}
-            </nav>
-
             <div className="nav nav-account" aria-label="Account actions">
               <div ref={accountMenuRef} className="account-menu-shell">
                 <button
@@ -172,6 +162,11 @@ function ProtectedLayout() {
 
                 {accountMenuOpen ? (
                   <div id="account-menu" className="account-menu" aria-label="Account menu">
+                    {bootstrap.currentUser.isAdmin ? (
+                      <Link className="account-menu-item" to="/admin">
+                        Admin
+                      </Link>
+                    ) : null}
                     <Link className="account-menu-item" to="/profile">
                       Profile
                     </Link>

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { api } from '../lib/api.js';
 import { useAppShell } from '../lib/app-shell.js';
+import { getGroupAvatarLabel, getGroupAvatarStyle } from '../lib/group-avatar.js';
 import type { BetSummary, GroupDetail } from '../lib/types.js';
 
 export default function Group() {
@@ -62,6 +63,13 @@ export default function Group() {
                   {group.memberCount} members · Created by {group.createdByUsername}
                 </p>
               </div>
+              <span
+                className="group-avatar group-avatar-large"
+                style={getGroupAvatarStyle(group.id)}
+                aria-hidden="true"
+              >
+                {getGroupAvatarLabel(group.name)}
+              </span>
             </div>
 
             <div className="row-wrap">
